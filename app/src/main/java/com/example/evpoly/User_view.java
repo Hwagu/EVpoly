@@ -33,7 +33,7 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.User_view);
+        setContentView(R.layout.user_view);
 
         //지도 객체 생성
         FragmentManager fm = getSupportFragmentManager();
@@ -56,7 +56,7 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapReady(@NonNull NaverMap naverMap) {
         naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_TRAFFIC, true); // 실시간 교통정보
 
-        출처: https://sysdocu.tistory.com/1384 [서버 나라 개발 왕자]
+
         Log.d(TAG, "onMapReady");
 
         //지도상에 마커 표시
