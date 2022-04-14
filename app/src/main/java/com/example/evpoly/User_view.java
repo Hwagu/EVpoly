@@ -9,6 +9,8 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
@@ -21,6 +23,13 @@ import com.naver.maps.map.util.FusedLocationSource;
 public class User_view extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = "MainActivity";
 
+    //타이머
+    private Button startBTN;
+    private Button stopBTN;
+    private TextView timeView;
+
+
+    //지도
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
     private FusedLocationSource mlocatinSource;
     private NaverMap mNaverMap;
