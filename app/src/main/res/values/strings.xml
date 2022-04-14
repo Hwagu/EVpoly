@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">EVpoly</string>
+    <string name="app_name">EVpoli</string>
+    <string name="user">USER</string>
+    <string name="manager">MANAGER</string>
+    <string name="id">ID</string>
+    <string name="login">LOGIN</string>
+    <string name="evpoli">EV poli</string>
+    <string name="welcome">Welcom! EVpoli</string>
+    <string name="name">Your Name !</string>
+    <string name="birth">Your Birthday !</string>
+    <string name="email">Your Email !</string>
+    <string name="number">Your Phone Number !</string>
+    <string name="clickthis">▽ Finish Click This !</string>
+    <string name="title">차량 번호를 입력해주세요 !</string>
+    <string name="carNumber">EV 000 가 0000</string>
+    <string name="okBTN">ok</string>
+    <string name="resetBTN">reset</string>
 </resources>
