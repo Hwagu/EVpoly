@@ -17,7 +17,7 @@
     <EditText
         android:id="@+id/id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
@@ -28,7 +28,7 @@
     <EditText
         android:id="@+id/pw"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:ems="10"
