@@ -4,66 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.example.evpoly.JoinActivity" >
+    tools:context="com.example.evpoly.JoinActivity">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
-        android:text="@string/welcome" />
+    <ImageView
+        android:id="@+id/clickBTN"
+        android:layout_width="428dp"
+        android:layout_height="135dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="0dp"
+        app:srcCompat="@drawable/_pg" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="274dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/evpoly" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
+        android:hint="이름"
         android:inputType="textPersonName"
-        android:hint="@string/name" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         android:ems="10"
+        android:hint="휴대폰 번호"
         android:inputType="textPersonName"
-        android:text="@string/birth" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
+        android:hint="비밀번호"
         android:inputType="textPersonName"
-        android:text="@string/email" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/editTextTextPersonName4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         android:ems="10"
+        android:hint="차 번호"
         android:inputType="textPersonName"
-        android:text="@string/number" />
+        android:minHeight="48dp" />
 
-    <TextView
-        android:id="@+id/textView5"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/clickthis" />
-
-    <ImageView
-        android:id="@+id/clickBTN"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        app:srcCompat="@drawable/_pg1" />
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/userBox"
+            android:layout_width="3dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:text="@string/user" />
+
+        <CheckBox
+            android:id="@+id/managerBox"
+            android:layout_width="3dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_weight="1"
+            android:text="@string/manager" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/checkBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/navy"
+        android:text="JOIN" />
 
 </LinearLayout>

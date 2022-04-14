@@ -18,8 +18,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private EditText id, pw;
     private CheckBox userBox, managerBox;
-    private Button loginBTN;
-    private TextView joinBTN;
+    private Button loginBTN, joinBTN;
 
 
     @Override
@@ -34,8 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         managerBox = (CheckBox) findViewById(R.id.managerBox);
 
         loginBTN = (Button) findViewById(R.id.loginBTN);
-
-        joinBTN = (TextView) findViewById(R.id.joinBTN);
+        joinBTN = (Button) findViewById(R.id.joinBTN);
 
         userBox.setOnCheckedChangeListener(this);
         managerBox.setOnCheckedChangeListener(this);
@@ -46,35 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        switch (compoundButton.getId()) {
-            case R.id.loginBTN:
 
-                case R.id.managerBox:
-                    if (managerBox.isChecked() == true) {
-                        Intent go = new Intent(this, Manager_view.class);
-                        finish();
-                        startActivity(go);
-                    } else if (userBox.isChecked() && managerBox.isChecked() == true) {
-                        Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
-                        break;
-                    } else if (userBox.isChecked() && managerBox.isChecked() == false) {
-                        Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
-                        break;
-                    }
-
-                case R.id.userBox:
-                    if (userBox.isChecked() == true) {
-                        Intent go = new Intent(this, User_view.class);
-                        finish();
-                        startActivity(go);
-                    } else if (userBox.isChecked() && managerBox.isChecked() == true) {
-                        Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
-                        break;
-                    } else if (userBox.isChecked() && managerBox.isChecked() == false) {
-                        Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
-                        break;
-                    }
-        }
     }
 
 
@@ -82,9 +52,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.joinBTN:
-                Intent go = new Intent(this, JoinActivity.class);
-                finish();
-                startActivity(go);
+                Intent goJoin = new Intent(this, JoinActivity.class);
+                startActivity(goJoin);
+                break;
+            case R.id.loginBTN:
+                if(managerBox.isChecked() == true && userBox.isChecked() == false){
+                    Intent goManager = new Intent(this, Manager_view.class);
+                    startActivity(goManager);
+                }
+                else if(userBox.isChecked() == true && managerBox.isChecked() == false){
+                    Intent goUser = new Intent(this, User_view.class);
+                    startActivity(goUser);
+                }
+                else {
+                    Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }
