@@ -59,7 +59,7 @@ public class Manager_view<list> extends AppCompatActivity {
         }
         else {
             builder.setMessage("["+A+"] 전기차가 아닙니다!");
-          // carList.setDivider(new ColorDrawable(Color.RED));
+           carList.setDivider(new ColorDrawable(Color.RED));
         }
             builder.setPositiveButton("예",
                     new DialogInterface.OnClickListener() {
