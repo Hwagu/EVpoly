@@ -35,7 +35,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="@string/carNumber"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="30sp" />
 
         </LinearLayout>
 
@@ -52,7 +53,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="110dp"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@color/hotpink"
+                android:backgroundTint="@color/yellow"
                 android:onClick="clickFunc"
                 android:text="@string/okBTN" />
 
@@ -72,9 +73,19 @@
         <ListView
             android:id="@+id/carList"
             android:layout_width="match_parent"
-            android:layout_height="561dp">
+            android:layout_height="427dp">
 
         </ListView>
+
+        <Button
+            android:id="@+id/alertBTN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/yellow"
+            android:onClick="clickFunc"
+            android:text="@string/alert"
+            android:textSize="24sp"
+            android:typeface="normal" />
 
     </LinearLayout>
 

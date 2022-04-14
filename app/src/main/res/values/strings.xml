@@ -15,4 +15,5 @@
     <string name="carNumber">EV 000 가 0000</string>
     <string name="okBTN">ok</string>
     <string name="resetBTN">reset</string>
+    <string name="alert">경고</string>
 </resources>

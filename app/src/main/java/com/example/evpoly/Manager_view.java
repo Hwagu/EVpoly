@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class Manager_view<list> extends AppCompatActivity {
     private EditText carNumber;
     private Button okBTN;
     private Button resetBTN;
+    private Button alertBTN;
     private String A;
     private ListView carList;
     ArrayList<String> car;
@@ -40,6 +42,7 @@ public class Manager_view<list> extends AppCompatActivity {
         carNumber = (EditText) findViewById(R.id.carNumber);
         okBTN = (Button) findViewById(R.id.okBTN);
         resetBTN = (Button) findViewById(R.id.resetBTN);
+        alertBTN = (Button) findViewById(R.id.alertBTN);
         carList = (ListView) findViewById(R.id.carList);
         carList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         car = new ArrayList<String>();
@@ -98,6 +101,11 @@ public class Manager_view<list> extends AppCompatActivity {
                     }
                 }
                 break;
+            case R.id.alertBTN:
+                Vibrator vib = (Vibrator)getSystemService(VIBRATOR_SERVICE);
+                vib.vibrate(1000);
+                break;
+
 
         }
     }
