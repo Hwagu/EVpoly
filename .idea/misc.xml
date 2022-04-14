@@ -3,11 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/hustar1234/AndroidStudioProjects/EVpoly/app/src/main/res/layout/activity_main.xml" value="0.22760416666666666" />
-        <entry key="..\:/Users/hustar1234/AndroidStudioProjects/EVpoly/app/src/main/res/layout/join_main.xml" value="0.24947916666666667" />
-        <entry key="..\:/Users/hustar1234/AndroidStudioProjects/EVpoly/app/src/main/res/layout/login_main.xml" value="0.24947916666666667" />
-        <entry key="..\:/Users/hustar1234/AndroidStudioProjects/EVpoly/app/src/main/res/layout/manager_app.xml" value="0.24947916666666667" />
-        <entry key="..\:/Users/hustar1234/AndroidStudioProjects/EVpoly/app/src/main/res/layout/userapp.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/join_main.xml" value="0.18795289855072464" />
+        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/login_main.xml" value="0.136226034308779" />
+        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/manager_view.xml" value="0.18840579710144928" />
+        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/user_view.xml" value="0.3333333333333333" />
       </map>
     </option>
   </component>
