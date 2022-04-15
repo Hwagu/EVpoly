@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,13 +21,18 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
 
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
 public class User_view extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = "MainActivity";
 
-    //타이머
+    //타이머 시작 종류 버튼
     private Button startBTN;
     private Button stopBTN;
+    //타이머 화면
     private TextView timeView;
+
 
 
     //지도
@@ -44,7 +50,17 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_view);
 
-        //지도 객체 생성
+        //타이머
+        timeView = (TextView) findViewById(R.id.timeView);
+
+        // TODO : 타이머 돌릴 총시간
+        String conversionTime = "000010";
+
+        // 카운트 다운 시작
+        countDown(conversionTime);
+
+
+       //지도 객체 생성
         FragmentManager fm = getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.mapView);
         if (mapFragment == null) {
@@ -60,6 +76,83 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback {
         mlocatinSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
     }
+
+    private void countDown(String time) {
+        long conversionTime = 0;
+
+        // 1000 단위가 1초
+        // 60000 단위가 1분
+        // 60000 * 3600 = 1시간
+
+        String getHour = time.substring(0, 2);
+        String getMin = time.substring(2, 4);
+        String getSecond = time.substring(4, 6);
+
+        // "00"이 아니고, 첫번째 자리가 0 이면 제거
+        if (getHour.substring(0, 1) == "0") {
+            getHour = getHour.substring(1, 2);
+        }
+
+        if (getMin.substring(0, 1) == "0") {
+            getMin = getMin.substring(1, 2);
+        }
+
+        if (getSecond.substring(0, 1) == "0") {
+            getSecond = getSecond.substring(1, 2);
+        }
+
+        // 변환시간
+        conversionTime = Long.valueOf(getHour) * 1000 * 3600 + Long.valueOf(getMin) * 60 * 1000 + Long.valueOf(getSecond) * 1000;
+
+        // 첫번쨰 인자 : 원하는 시간 (예를들어 30초면 30 x 1000(주기))
+        // 두번쨰 인자 : 주기( 1000 = 1초)
+        //1시간 = 3600000 14시간 =50400000
+        new CountDownTimer(36000000, 1000) {
+
+            // 특정 시간마다 뷰 변경
+            public void onTick(long millisUntilFinished) {
+
+                // 시간단위
+                String hour = String.valueOf(millisUntilFinished / (60 * 60 * 1000));
+
+                // 분단위
+                long getMin = millisUntilFinished - (millisUntilFinished / (60 * 60 * 1000)) ;
+                String min = String.valueOf(getMin / (60 * 1000)); // 몫
+
+                // 초단위
+                String second = String.valueOf((getMin % (60 * 1000)) / 1000); // 나머지
+
+//                // 밀리세컨드 단위
+//                String millis = String.valueOf((getMin % (60 * 1000)) % 1000); // 몫
+
+                // 시간이 한자리면 0을 붙인다
+                if (hour.length() == 1) {
+                    hour = "0" + hour;
+                }
+
+                // 분이 한자리면 0을 붙인다
+                if (min.length() == 1) {
+                    min = "0" + min;
+                }
+
+                // 초가 한자리면 0을 붙인다
+                if (second.length() == 1) {
+                    second = "0" + second;
+                }
+
+                timeView.setText(hour + ":" + min + ":" + second);
+            }
+
+            @Override
+            public void onFinish() {
+                timeView.setText("시간종료!");
+
+
+            }
+        }.start();
+
+
+        }
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
