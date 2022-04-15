@@ -46,10 +46,10 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback {
 
         //지도 객체 생성
         FragmentManager fm = getSupportFragmentManager();
-        MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.map_fragment);
+        MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.mapView);
         if (mapFragment == null) {
             mapFragment = MapFragment.newInstance();
-            fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
+            fm.beginTransaction().add(R.id.mapView, mapFragment).commit();
         }
 
         //getMapAsync를 호출 하여 비동기로 onMAPReady 콜백 메서드 호출
