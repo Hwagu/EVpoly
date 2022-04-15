@@ -27,7 +27,7 @@
             android:text="주차 목록"
             android:textAlignment="center"
             android:textColor="#000"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -77,7 +77,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="377dp"
+        android:layout_height="434dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <Button
@@ -87,6 +87,7 @@
         android:backgroundTint="@color/navy"
         android:onClick="clickFunc"
         android:text="@string/alert"
-        android:textSize="20sp" />
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
 </LinearLayout>
