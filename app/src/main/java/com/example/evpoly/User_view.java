@@ -2,6 +2,7 @@ package com.example.evpoly;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 
@@ -10,7 +11,10 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.naver.maps.geometry.LatLng;
@@ -24,7 +28,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class User_view extends AppCompatActivity implements OnMapReadyCallback {
+public class User_view extends AppCompatActivity implements OnMapReadyCallback,  CompoundButton.OnCheckedChangeListener{
     private static final String TAG = "MainActivity";
 
     //타이머 시작 종류 버튼
@@ -33,6 +37,9 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback {
     //타이머 화면
     private TextView timeView;
 
+    private Switch powerswitch;
+    private Switch powerupswitch;
+    private ConstraintLayout timelayout;
 
 
     //지도
@@ -50,14 +57,24 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_view);
 
-        //타이머
+
         timeView = (TextView) findViewById(R.id.timeView);
+        powerswitch =(Switch) findViewById(R.id.powerswitch);
+        powerupswitch = (Switch) findViewById(R.id.powerupswitch);
+        timelayout = (ConstraintLayout)findViewById(R.id.timelayout);
+        stopBTN = (Button)findViewById(R.id.stopBTN);
+        startBTN= (Button)findViewById(R.id.startBTN);
+
 
         // TODO : 타이머 돌릴 총시간
         String conversionTime = "000010";
 
         // 카운트 다운 시작
         countDown(conversionTime);
+
+        //스위치
+        powerswitch.setOnCheckedChangeListener(this);
+        powerupswitch.setOnCheckedChangeListener(this);
 
 
        //지도 객체 생성
@@ -190,6 +207,21 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback {
             }
 
 
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {
+        switch (compoundButton.getId()){
+            case(R.id.powerswitch):
+                if(ischecked) {
+                    timelayout.setVisibility(View.VISIBLE);
+                    powerupswitch.setEnabled(false);
+                }
+                else {
+                    timelayout.setVisibility(View.INVISIBLE);
+                    powerupswitch.setEnabled(true);
+                }
         }
     }
 }

@@ -25,7 +25,7 @@
         android:orientation="horizontal">
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/powerswitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -40,7 +40,7 @@
             android:track="@drawable/switch_track_selector" />
 
         <Switch
-            android:id="@+id/switch2"
+            android:id="@+id/powerupswitch"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -55,38 +55,54 @@
             android:track="@drawable/switch_track_selector" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/timeView"
-        android:layout_width="360dp"
-        android:layout_height="106dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/navymain"
-        android:textSize="60sp" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/timelayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="60dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="260dp"
+        android:layout_gravity="center">
 
-        <Button
-            android:id="@+id/startBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="Button" />
+        <TextView
+                android:id="@+id/timeView"
+                android:layout_width="360dp"
+                android:layout_height="106dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@color/navymain"
 
-        <Button
-            android:id="@+id/stopBTN"
-            android:layout_width="wrap_content"
+                android:textSize="60sp"
+
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.49"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Button" />
-    </LinearLayout>
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/startBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="충전시작" />
+
+            <Button
+                android:id="@+id/stopBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="충전완료" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>
