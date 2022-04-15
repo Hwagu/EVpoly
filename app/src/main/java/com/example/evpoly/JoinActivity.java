@@ -56,6 +56,8 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    // 주석
+
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
