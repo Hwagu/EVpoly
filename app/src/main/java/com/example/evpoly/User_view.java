@@ -107,23 +107,27 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback {
         // 첫번쨰 인자 : 원하는 시간 (예를들어 30초면 30 x 1000(주기))
         // 두번쨰 인자 : 주기( 1000 = 1초)
         //1시간 = 3600000 14시간 =50400000
-        new CountDownTimer(36000000, 1000) {
+        new CountDownTimer(3600000, 1000) {
 
             // 특정 시간마다 뷰 변경
             public void onTick(long millisUntilFinished) {
 
-                // 시간단위
+                // 시
                 String hour = String.valueOf(millisUntilFinished / (60 * 60 * 1000));
 
-                // 분단위
-                long getMin = millisUntilFinished - (millisUntilFinished / (60 * 60 * 1000)) ;
-                String min = String.valueOf(getMin / (60 * 1000)); // 몫
+                //분을 위한 나머지 = h_na
+                long h_na = millisUntilFinished % (60 * 60 * 1000);
+                //계산의 몫, 나머지 확인을 위한 로그
+                Log.i(TAG, hour + "-"+h_na);
 
-                // 초단위
-                String second = String.valueOf((getMin % (60 * 1000)) / 1000); // 나머지
+                //h_na의 몫 = 분
+                String min = String.valueOf(h_na / ( 60 * 1000));
 
-//                // 밀리세컨드 단위
-//                String millis = String.valueOf((getMin % (60 * 1000)) % 1000); // 몫
+                //h_na의 나머지 = 분
+                String second = String.valueOf((h_na % (60 * 1000))/ (1000));
+                Log.i(TAG, hour + "-"+min + "-"+second );
+
+
 
                 // 시간이 한자리면 0을 붙인다
                 if (hour.length() == 1) {
