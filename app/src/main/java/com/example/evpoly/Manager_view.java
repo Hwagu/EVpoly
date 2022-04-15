@@ -1,111 +1,123 @@
 package com.example.evpoly;
 
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+//import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.evpoly.R;
+
+import org.w3c.dom.Text;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class Manager_view<list> extends AppCompatActivity {
-
-    //Debug Variable---------------------
-    public static final String TAG = "Manager";
-    private static final boolean DEBUG = true;
-
-    // MEmber Variable-------------------
-    private EditText carNumber;
-    private Button okBTN;
-    private Button resetBTN;
+public class Manager_view extends AppCompatActivity {
+    private EditText addcarNum;
+    private EditText addName;
+    private Button addBTN;
     private Button alertBTN;
-    private String A;
-    private ListView carList;
-    ArrayList<String> car;
-    ArrayAdapter<String> adapter;
-
-
+    private String Name;
+    private String carNum;
+    private RecyclerView mRecyclerView;
+    private MyRecyclerAdapter mRecyclerAdapter;
+    private ArrayList<FriendItem> mfriendItems; //목록 array List
+    ItemTouchHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager_view);
-
-        //xml 파일에 존재하는 UI요소  객체에 저장하기 -> ID로 UI 요소를 찾아서 설정
-        carNumber = (EditText) findViewById(R.id.carNumber);
-        okBTN = (Button) findViewById(R.id.okBTN);
-        resetBTN = (Button) findViewById(R.id.resetBTN);
+        addBTN = (Button) findViewById(R.id.addBTN);
         alertBTN = (Button) findViewById(R.id.alertBTN);
-        carList = (ListView) findViewById(R.id.carList);
-        carList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        car = new ArrayList<String>();
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, car);
-        ListView listview = (ListView) findViewById(R.id.carList);
-        carList.setAdapter(adapter);
+        addcarNum = (EditText) findViewById(R.id.addcarNum);
+        addName = (EditText) findViewById(R.id.addName);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        /* initiate adapter */
+        mRecyclerAdapter = new MyRecyclerAdapter();
+
+        /* initiate recyclerview */
+        mRecyclerView.setAdapter(mRecyclerAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+
+
+        //RecyclerView의 Adapter 세팅
+        mfriendItems = new ArrayList<>();
+        mRecyclerAdapter.setFriendList(mfriendItems);
+//        for(int i=1;i<=10;i++){
+//            if(i%2==0)
+//                mfriendItems.add(new FriendItem(R.drawable.icon,i+"번째 사람",i+"번째 상태메시지"));
+//            else
+//                mfriendItems.add(new FriendItem(R.drawable.icon,i+"번째 사람",i+"번째 상태메시지"));
+//        }
+        //ItemTouchHelper 생성
+
+        helper = new ItemTouchHelper(new ItemTouchHelperCallback(mRecyclerAdapter));
+        helper.attachToRecyclerView(mRecyclerView);
+
+
 
     }
-
-
+    // 전기차가 아닐때 알림 띄우기
     void showButtonAlertDialog()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //builder.setTitle("경고");
-        if (A.startsWith("EV")) {
-            builder.setMessage("["+A+"] 전기차 입니다!");
-        }
-        else {
-            builder.setMessage("["+A+"] 전기차가 아닙니다!");
-           carList.setDivider(new ColorDrawable(Color.RED));
-        }
-            builder.setPositiveButton("예",
-                    new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface dialog, int which) {
-                }
-            });
+
+        builder.setMessage("["+carNum+"] 전기차가 아닙니다!");
+
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
 
         builder.show(); }
-
-
     public void clickFunc(View view) {
-        int check;
-        int count = adapter.getCount();
         switch (view.getId()) {
-            case R.id.okBTN:
-                A = carNumber.getText().toString();
-                car.add(carNumber.getText().toString());
-                adapter.notifyDataSetChanged();
-                showButtonAlertDialog();
-                if (A.startsWith("EV")==false)
+            case R.id.addBTN:
+                //mfriendItems = new ArrayList<>();
+                Name = addName.getText().toString();
+                carNum = addcarNum.getText().toString();
+                mfriendItems.add(new FriendItem(Name, carNum));
+                if (carNum.startsWith("EV")==false)
                 {
-                    carList.setBackgroundColor(Color.RED);
+                    showButtonAlertDialog();
                 }
-
-
-                    break;
-
-            case R.id.resetBTN:
-                if (count > 0) {
-                    check = carList.getCheckedItemPosition();
-                    if (check > -1 && check < count) {
-                        car.remove(check);
-                        carList.clearChoices();
-                        adapter.notifyDataSetChanged();
-
-                    }
-                }
+                mRecyclerAdapter.notifyDataSetChanged();
+                addName.setText("");
+                addcarNum.setText("");
                 break;
+
             case R.id.alertBTN:
-                Vibrator vib = (Vibrator)getSystemService(VIBRATOR_SERVICE);
-                vib.vibrate(1000);
+                Toast.makeText(this,"경보",Toast.LENGTH_SHORT).show();
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(),notification);
+                ringtone.play();
                 break;
-
 
         }
     }
