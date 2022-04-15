@@ -40,11 +40,8 @@
         android:layout_marginRight="30dp"
         android:ems="10"
         android:inputType="textPassword"
-<<<<<<< HEAD
         android:hint="비밀번호" />
-=======
-        tools:ignore="SpeakableTextPresentCheck" />
->>>>>>> master
+
 
     <LinearLayout
         android:layout_width="match_parent"

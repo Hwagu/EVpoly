@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Manager_view extends AppCompatActivity {
+    private ImageView profile;
     private EditText addcarNum;
     private EditText addName;
     private Button addBTN;
@@ -49,6 +51,7 @@ public class Manager_view extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager_view);
+        profile = (ImageView) findViewById(R.id. profile);
         addBTN = (Button) findViewById(R.id.addBTN);
         alertBTN = (Button) findViewById(R.id.alertBTN);
         addcarNum = (EditText) findViewById(R.id.addcarNum);
@@ -86,9 +89,7 @@ public class Manager_view extends AppCompatActivity {
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //builder.setTitle("경고");
-
         builder.setMessage("["+carNum+"] 전기차가 아닙니다!");
-
         builder.setPositiveButton("예",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -99,7 +100,6 @@ public class Manager_view extends AppCompatActivity {
     public void clickFunc(View view) {
         switch (view.getId()) {
             case R.id.addBTN:
-                //mfriendItems = new ArrayList<>();
                 Name = addName.getText().toString();
                 carNum = addcarNum.getText().toString();
                 mfriendItems.add(new FriendItem(Name, carNum));

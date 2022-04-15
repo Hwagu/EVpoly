@@ -80,6 +80,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             if (item.getMessage().startsWith("EV") == false) {
                 //showButtonAlertDialog();
                 itemView.setBackgroundColor(Color.YELLOW);
+                profile.setImageResource(R.drawable.evpoli_no);
 
             }
         }
