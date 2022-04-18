@@ -14,7 +14,7 @@
         android:layout_height="135dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="0dp"
-        app:srcCompat="@drawable/_pg" />
+        app:srcCompat="@drawable/evpoli" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -30,12 +30,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
-        android:minHeight="48dp" />
-<<<<<<< HEAD
         android:hint="이름"
-=======
-        android:hint="@string/name"
->>>>>>> master
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
@@ -47,12 +42,8 @@
         android:ems="10"
         android:hint="휴대폰 번호"
         android:inputType="textPersonName"
-<<<<<<< HEAD
         android:minHeight="48dp" />
-=======
-        android:minHeight="48dp"
-        android:text="@string/birth" />
->>>>>>> master
+
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
@@ -63,12 +54,8 @@
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPersonName"
-<<<<<<< HEAD
         android:minHeight="48dp" />
-=======
-        android:minHeight="48dp"
-        android:text="@string/email" />
->>>>>>> master
+
 
     <EditText
         android:id="@+id/editTextTextPersonName4"
@@ -78,12 +65,8 @@
         android:ems="10"
         android:hint="차 번호"
         android:inputType="textPersonName"
-<<<<<<< HEAD
         android:minHeight="48dp" />
-=======
-        android:minHeight="48dp"
-        android:text="@string/number" />
->>>>>>> master
+
 
     <LinearLayout
         android:layout_width="match_parent"
