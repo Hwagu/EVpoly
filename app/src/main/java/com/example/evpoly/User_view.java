@@ -1,13 +1,16 @@
 package com.example.evpoly;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -16,6 +19,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
@@ -37,6 +41,7 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback, 
     //타이머 화면
     private TextView timeView;
 
+    private CountDownTimer starttimer;
     private Switch powerswitch;
     private Switch powerupswitch;
     private ConstraintLayout timelayout;
@@ -50,6 +55,7 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback, 
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
+
 
 
     @Override
@@ -76,6 +82,8 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback, 
         powerswitch.setOnCheckedChangeListener(this);
         powerupswitch.setOnCheckedChangeListener(this);
 
+        //타이머 초기 invisible
+        timelayout.setVisibility(View.INVISIBLE);
 
        //지도 객체 생성
         FragmentManager fm = getSupportFragmentManager();
@@ -95,87 +103,7 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback, 
     }
 
 
-// 일반 충전
-    private void countDown(String time) {
-        long conversionTime = 0;
 
-        // 1000 단위가 1초
-        // 60000 단위가 1분
-        // 60000 * 3600 = 1시간
-
-        String getHour = time.substring(0, 2);
-        String getMin = time.substring(2, 4);
-        String getSecond = time.substring(4, 6);
-
-        // "00"이 아니고, 첫번째 자리가 0 이면 제거
-        if (getHour.substring(0, 1) == "0") {
-            getHour = getHour.substring(1, 2);
-        }
-
-        if (getMin.substring(0, 1) == "0") {
-            getMin = getMin.substring(1, 2);
-        }
-
-        if (getSecond.substring(0, 1) == "0") {
-            getSecond = getSecond.substring(1, 2);
-        }
-
-        // 변환시간
-        conversionTime = Long.valueOf(getHour) * 1000 * 3600 + Long.valueOf(getMin) * 60 * 1000 + Long.valueOf(getSecond) * 1000;
-
-        // 첫번쨰 인자 : 원하는 시간 (예를들어 30초면 30 x 1000(주기))
-        // 두번쨰 인자 : 주기( 1000 = 1초)
-        //1시간 = 3600000 14시간 =50400000
-        new CountDownTimer(3600000, 1000) {
-
-            // 특정 시간마다 뷰 변경
-            public void onTick(long millisUntilFinished) {
-
-                // 시
-                String hour = String.valueOf(millisUntilFinished / (60 * 60 * 1000));
-
-                //분을 위한 나머지 = h_na
-                long h_na = millisUntilFinished % (60 * 60 * 1000);
-                //계산의 몫, 나머지 확인을 위한 로그
-                Log.i(TAG, hour + "-"+h_na);
-
-                //h_na의 몫 = 분
-                String min = String.valueOf(h_na / ( 60 * 1000));
-
-                //h_na의 나머지 = 분
-                String second = String.valueOf((h_na % (60 * 1000))/ (1000));
-                Log.i(TAG, hour + "-"+min + "-"+second );
-
-
-
-                // 시간이 한자리면 0을 붙인다
-                if (hour.length() == 1) {
-                    hour = "0" + hour;
-                }
-
-                // 분이 한자리면 0을 붙인다
-                if (min.length() == 1) {
-                    min = "0" + min;
-                }
-
-                // 초가 한자리면 0을 붙인다
-                if (second.length() == 1) {
-                    second = "0" + second;
-                }
-
-                timeView.setText(hour + ":" + min + ":" + second);
-            }
-
-            @Override
-            public void onFinish() {
-                timeView.setText("시간종료!");
-
-
-            }
-        }.start();
-
-
-        }
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
@@ -213,31 +141,242 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback, 
     }
 
 
-    // 눌렸을때 아예 시작하게 하고 싶은데 어케 하지
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {
-        switch (compoundButton.getId()){
-            case(R.id.powerswitch):
-                if(ischecked) {
+        switch (compoundButton.getId()) {
+            case (R.id.powerswitch):
+                if (ischecked) {
                     timelayout.setVisibility(View.VISIBLE);
                     powerupswitch.setEnabled(false);
-                }
-                else {
+                    stopBTN.setEnabled(false);
+
+
+
+                    startBTN.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View view) {
+                            powerswitch.setEnabled(false);
+                            startBTN.setEnabled(false);
+                            stopBTN.setEnabled(true);
+
+
+
+                            // 첫번쨰 인자 : 원하는 시간 (예를들어 30초면 30 x 1000(주기))
+                            // 두번쨰 인자 : 주기( 1000 = 1초)
+                            //1시간 = 3600000 14시간 =50400000
+                            starttimer =  new CountDownTimer(50400000, 1000) {
+
+                                // 특정 시간마다 뷰 변경
+                                public void onTick(long millisUntilFinished) {
+
+                                    // 시
+                                    String hour = String.valueOf(millisUntilFinished / (60 * 60 * 1000));
+
+                                    //분을 위한 나머지 = h_na
+                                    long h_na = millisUntilFinished % (60 * 60 * 1000);
+                                    //계산의 몫, 나머지 확인을 위한 로그
+                                    Log.i(TAG, hour + "-" + h_na);
+
+                                    //h_na의 몫 = 분
+                                    String min = String.valueOf(h_na / (60 * 1000));
+
+                                    //h_na의 나머지 = 분
+                                    String second = String.valueOf((h_na % (60 * 1000)) / (1000));
+                                    Log.i(TAG, hour + "-" + min + "-" + second);
+
+
+                                    // 시간이 한자리면 0을 붙인다
+                                    if (hour.length() == 1) {
+                                        hour = "0" + hour;
+                                    }
+
+                                    // 분이 한자리면 0을 붙인다
+                                    if (min.length() == 1) {
+                                        min = "0" + min;
+                                    }
+
+                                    // 초가 한자리면 0을 붙인다
+                                    if (second.length() == 1) {
+                                        second = "0" + second;
+                                    }
+
+                                    timeView.setText(hour + ":" + min + ":" + second);
+                                }
+
+                                @Override
+                                public void onFinish() {
+                                    timeView.setText("시간종료!");
+                                    startBTN.setEnabled(true);
+
+                                }
+                            }.start();
+
+                        }
+
+                    });
+
+
+                    stopBTN.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            showEndAlertDialog();
+                        }
+                    });
+
+                } else {
                     timelayout.setVisibility(View.INVISIBLE);
                     powerupswitch.setEnabled(true);
                 }
                 break;
 
-            case(R.id.powerupswitch):
-                if(ischecked){
+            case (R.id.powerupswitch):
+                if (ischecked) {
                     timelayout.setVisibility(View.VISIBLE);
                     powerswitch.setEnabled(false);
-                }
-                else {
+
+
+                    startBTN.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View view) {
+                            startBTN.setEnabled(false);
+                            powerupswitch.setEnabled(false);
+                            starttimer = new CountDownTimer(3600000, 1000) {
+
+                                // 특정 시간마다 뷰 변경
+                                public void onTick(long millisUntilFinished) {
+
+                                    // 시
+                                    String hour = String.valueOf(millisUntilFinished / (60 * 60 * 1000));
+
+                                    //분을 위한 나머지 = h_na
+                                    long h_na = millisUntilFinished % (60 * 60 * 1000);
+                                    //계산의 몫, 나머지 확인을 위한 로그
+                                    Log.i(TAG, hour + "-" + h_na);
+
+                                    //h_na의 몫 = 분
+                                    String min = String.valueOf(h_na / (60 * 1000));
+
+                                    //h_na의 나머지 = 분
+                                    String second = String.valueOf((h_na % (60 * 1000)) / (1000));
+                                    Log.i(TAG, hour + "-" + min + "-" + second);
+
+
+                                    // 시간이 한자리면 0을 붙인다
+                                    if (hour.length() == 1) {
+                                        hour = "0" + hour;
+                                    }
+
+                                    // 분이 한자리면 0을 붙인다
+                                    if (min.length() == 1) {
+                                        min = "0" + min;
+                                    }
+
+                                    // 초가 한자리면 0을 붙인다
+                                    if (second.length() == 1) {
+                                        second = "0" + second;
+                                    }
+
+                                    timeView.setText(hour + ":" + min + ":" + second);
+                                }
+
+                                @Override
+                                public void onFinish() {
+
+                                    timeView.setText("시간종료!");
+
+                                }
+                            }.start();
+
+                        }
+
+
+                    });
+
+                    stopBTN.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            showEndAlertDialog();
+
+
+                        }
+
+                    });
+
+
+
+                } else {
                     timelayout.setVisibility(View.INVISIBLE);
                     powerswitch.setEnabled(true);
                 }
                 break;
-                }
         }
     }
+
+
+
+    //충전 완료 버튼 눌릴 시 확인 팝업 띄우기
+    void showEndAlertDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("충전을 종료하시겠습니까?");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        powerswitch.setChecked(false);
+                        powerupswitch.setEnabled(true);
+                        powerupswitch.setChecked(false);
+                        powerswitch.setEnabled(true);
+                        timeView.setText("");
+                        starttimer.cancel();
+                        startBTN.setEnabled(true);
+                        Toast.makeText(getApplicationContext(),"종료 되었습니다.",Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+        builder.setNegativeButton("아니요",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        Toast.makeText(getApplicationContext(),"충전을 계속 합니다.",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+        builder.show();
+
+
+    }
+
+
+
+    //타이머 선언
+    private void countDown(String time) {
+        long conversionTime = 0;
+
+        // 1000 단위가 1초
+        // 60000 단위가 1분
+        // 60000 * 3600 = 1시간
+
+        String getHour = time.substring(0, 2);
+        String getMin = time.substring(2, 4);
+        String getSecond = time.substring(4, 6);
+
+        // "00"이 아니고, 첫번째 자리가 0 이면 제거
+        if (getHour.substring(0, 1) == "0") {
+            getHour = getHour.substring(1, 2);
+        }
+
+        if (getMin.substring(0, 1) == "0") {
+            getMin = getMin.substring(1, 2);
+        }
+
+        if (getSecond.substring(0, 1) == "0") {
+            getSecond = getSecond.substring(1, 2);
+        }
+
+        // 변환시간
+        conversionTime = Long.valueOf(getHour) * 1000 * 3600 + Long.valueOf(getMin) * 60 * 1000 + Long.valueOf(getSecond) * 1000;
+    }
+
+}
