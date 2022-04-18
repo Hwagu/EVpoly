@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.evpoly">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -13,23 +13,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EVpoly">
+        android:theme="@style/Theme.EVpoly"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".VolleyActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="5s6g59jkz6" />
 
         <activity
-            android:name="com.example.evpoly.JoinActivity"
+            android:name=".JoinActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.evpoly.Manager_view"
+            android:name=".Manager_view"
             android:exported="false" />
         <activity
-            android:name="com.example.evpoly.User_view"
+            android:name=".User_view"
             android:exported="false" />
         <activity
-            android:name="com.example.evpoly.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
