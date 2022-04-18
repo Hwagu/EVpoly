@@ -210,6 +210,8 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback, 
         }
     }
 
+
+    // 눌렸을때 아예 시작하게 하고 싶은데 어케 하지
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {
         switch (compoundButton.getId()){
