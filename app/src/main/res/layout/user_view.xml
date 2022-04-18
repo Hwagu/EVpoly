@@ -73,7 +73,7 @@
                 android:layout_height="106dp"
                 android:text="TextView"
                 android:textAlignment="center"
-                android:textColor="@color/navymain"
+                android:textColor="@color/navy"
 
                 android:textSize="60sp"
 

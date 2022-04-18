@@ -94,6 +94,8 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback, 
 
     }
 
+
+// 일반 충전
     private void countDown(String time) {
         long conversionTime = 0;
 
@@ -224,6 +226,18 @@ public class User_view extends AppCompatActivity implements OnMapReadyCallback, 
                     timelayout.setVisibility(View.INVISIBLE);
                     powerupswitch.setEnabled(true);
                 }
+                break;
+
+            case(R.id.powerupswitch):
+                if(ischecked){
+                    timelayout.setVisibility(View.VISIBLE);
+                    powerswitch.setEnabled(false);
+                }
+                else {
+                    timelayout.setVisibility(View.INVISIBLE);
+                    powerswitch.setEnabled(true);
+                }
+                break;
+                }
         }
     }
-}
