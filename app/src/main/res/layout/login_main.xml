@@ -4,35 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context="com.example.evpoly.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="224dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="195dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="80dp"
         app:srcCompat="@drawable/evpoli" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="207dp"
+        android:layout_height="39dp"
+        app:srcCompat="@drawable/evpoly" />
 
     <EditText
         android:id="@+id/id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/id" />
+        android:hint="휴대폰 번호" />
 
     <EditText
         android:id="@+id/pw"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:hint="비밀번호" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +50,7 @@
 
         <CheckBox
             android:id="@+id/userBox"
-            android:layout_width="26dp"
+            android:layout_width="3dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_weight="1"
@@ -62,24 +71,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/yellow"
+        android:backgroundTint="@color/navy"
         android:gravity="center"
         android:text="@string/login" />
 
-    <TextView
+    <Button
         android:id="@+id/joinBTN"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="- JOIN !"
-        android:textSize="10sp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:gravity="center"
-        android:text="@string/evpoli" />
+        android:backgroundTint="@color/brown"
+        android:text="JOIN" />
 
 </LinearLayout>

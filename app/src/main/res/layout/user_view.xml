@@ -38,6 +38,9 @@
             android:textStyle="bold"
             android:thumb="@drawable/switch_thumb"
             android:track="@drawable/switch_track_selector" />
+            android:minHeight="48dp"
+            android:text="일반" />
+
 
         <Switch
             android:id="@+id/powerupswitch"
@@ -53,6 +56,8 @@
             android:textStyle="bold"
             android:thumb="@drawable/switch_thumb"
             android:track="@drawable/switch_track_selector" />
+            android:minHeight="48dp"
+            android:text="급속" />
     </LinearLayout>
 
 
