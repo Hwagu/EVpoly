@@ -2,7 +2,10 @@ package com.example.evpoly;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,7 +18,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -23,6 +28,7 @@ import java.net.URL;
 
 public class JoinActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
+    private static String IP_ADDRESS = "223.26.138.80";
     private static final String TAG = "LoginActivity";
 
     private CheckBox userBox, managerBox;
@@ -68,8 +74,23 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                 else {
                     Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
                 }
-                dataInsert();
-                Toast.makeText(this, "눌렀다.", Toast.LENGTH_LONG).show();
+
+                String name = etName.getText().toString();
+                String tel = etTel.getText().toString();
+                String pw = etPw.getText().toString();
+                String car = etCar.getText().toString();
+
+                InsertData task = new InsertData();
+                task.execute("http://vmfhwprxm.dothome.co.kr" + "/userinsert.php", name,tel, pw, car);
+
+                name = etName.getText().toString();
+                etName.setText("");
+                etTel.setText("");
+                etPw.setText("");
+                etCar.setText("");
+
+                Toast.makeText(getApplicationContext(), "id : "+name +" 님의 회원가입이 완료 되었습니다.", Toast.LENGTH_LONG).show();
+
                 break;
         }
 
@@ -82,56 +103,94 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void dataInsert() {
-        new Thread() {
-            public void run() {
-                try {
-                    URL url = new URL("http://vmfhwprxm.dothome.co.kr/userinsert.php/");
-                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                    http.setDefaultUseCaches(false);
-                    http.setDoInput(true);
-                    http.setRequestMethod("POST");
-                    http.setRequestProperty("content-type", "application/x-www-form-urlencoded");
+    class InsertData extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog;
 
-                    StringBuffer buffer = new StringBuffer();
-                    buffer.append("name").append("=").append(etName.getText().toString()).append("/").append(etTel.getText().toString()).append("/").
-                            append(etPw.getText().toString()).append("/").append(etCar.getText().toString()).append("/");
-
-                    OutputStreamWriter osw = new OutputStreamWriter(http.getOutputStream(), "utf-8");
-                    osw.write(buffer.toString());
-                    osw.flush();
-
-                    InputStreamReader tmp = new InputStreamReader(http.getInputStream(), "utf-8");
-                    StringBuilder builder = new StringBuilder();
-                    String str;
-                    final BufferedReader reader = new BufferedReader(tmp);
-                    while (reader.readLine() != null) {
-                        System.out.println(reader.readLine());
-                    }
-                    while ((str = reader.readLine()) != null) {
-                        builder.append(str = "\n");
-                    }
-                    String resultData = builder.toString();
-                    final String[] sResult = resultData.split("/");
-                        handler.post(r);
-
-                        handler.post(r) {
-                        etName.setText(sResult[0]);
-                        etTel.setText(sResult[1]);
-                        etPw.setText(sResult[2]);
-                        etCar.setText(sResult[3]);
-                    }
-                } catch (Exception e) {
-                    System.out.println("인터넷에 문제가 있습니다.");
-                    Log.e("Error", "인터넷 문제 발생", e);
-                }
-            }
-        }.start();
-    }
-
-    private Runnable r = new Runnable() {
         @Override
-        public void run() {
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(JoinActivity.this,
+                    "Please Wait", null, true, true);
         }
-    };
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+//            mTextViewResult.setText(result);
+            Log.d(TAG, "POST response  - " + result);
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String name = (String)params[1];
+            String tel = (String)params[2];
+            String pw = (String)params[3];
+            String car = (String)params[4];
+
+            String serverURL = (String)params[0];
+            String postParameters = "name=" + name + "&tel=" + tel +"&pw="+ pw +"&car"+car;
+
+
+            try {
+
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+
+                bufferedReader.close();
+
+
+                return sb.toString();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData: Error ", e);
+
+                return new String("Error: " + e.getMessage());
+            }
+
+        }
+    }
 }
