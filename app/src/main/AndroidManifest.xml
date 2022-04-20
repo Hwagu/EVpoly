@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EVpoly"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".VolleyActivity"
-            android:exported="false" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"

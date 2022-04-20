@@ -2,23 +2,38 @@ package com.example.evpoly;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+import org.w3c.dom.Text;
+
+public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
 
+    DBHelper dbHelper;
+    SQLiteDatabase db;
+    String databaseName;
+    private String alertNull;
+
     private EditText id, pw;
-    private CheckBox userBox, managerBox;
     private Button loginBTN, joinBTN;
+
+    String Text;
+    String Text2;
+    String ID;
+    String PW;
 
 
     @Override
@@ -26,94 +41,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main);
 
+        dbHelper = new DBHelper(this);
+        db = dbHelper.getReadableDatabase();
+
         id = (EditText) findViewById(R.id.id);
         pw = (EditText) findViewById(R.id.pw);
 
-        userBox = (CheckBox) findViewById(R.id.userBox);
-        managerBox = (CheckBox) findViewById(R.id.managerBox);
-
         loginBTN = (Button) findViewById(R.id.loginBTN);
-        joinBTN = (Button) findViewById(R.id.joinBTN);
+        joinBTN = (Button) findViewById(R.id.JoinBTN);
 
-        userBox.setOnCheckedChangeListener(this);
-        managerBox.setOnCheckedChangeListener(this);
+        databaseName = "diary";
 
-        loginBTN.setOnClickListener(this);
-        joinBTN.setOnClickListener(this);
+        joinBTN.setOnClickListener(
+                new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent goJoin = new Intent(getApplicationContext(), JoinActivity.class);
+                        startActivity(goJoin);
+                    }
+                }
+        );
+
+        loginBTN.setOnClickListener(
+                new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (db != null) {
+                            Cursor cursor = db.rawQuery("SELECT name, major FROM " + "PORODUCT", null);
+                            cursor.moveToNext();
+                            ID = cursor.getString(0);
+                            PW = cursor.getString(1);
+                            Text = id.getText().toString();
+                            Text2 = pw.getText().toString();
+                            if (Text.equals(ID) && Text2.equals(PW)) {
+                                Intent goManager = new Intent(getApplicationContext(), Manager_view.class);
+                                startActivity(goManager);
+                                Toast.makeText(getApplicationContext(), Text + "님 환영합니다.", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                            cursor.close();
+                        }
+                    }
+                }
+        );
+
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-    }
-
-    // 주석
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.joinBTN:
-                Intent goJoin = new Intent(this, JoinActivity.class);
-                startActivity(goJoin);
-                break;
-            case R.id.loginBTN:
-                if(managerBox.isChecked() == true && userBox.isChecked() == false){
-                    Intent goManager = new Intent(this, Manager_view.class);
-                    startActivity(goManager);
-                }
-                else if(userBox.isChecked() == true && managerBox.isChecked() == false){
-                    Intent goUser = new Intent(this, User_view.class);
-                    startActivity(goUser);
-                }
-                else {
-                    Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
-                }
-                break;
-        }
-    }
 }
 
-//    @Override
-//    public void onClick(View view) {
-//
-//        boolean checked = ((CheckBox) view).isChecked();
-//
-//        switch(view.getId()) {
-//            case R.id.loginBTN:
-//
-//                case R.id.managerBox:
-//                    if (managerBox.isChecked() == true) {
-//                        Intent go = new Intent(this, Manager.class);
-//                        finish();
-//                        startActivity(go);
-//                    }
-//
-//                    else if (userBox.isChecked() == true) {
-//                        Intent go = new Intent(this, User.class);
-//                        finish();
-//                        startActivity(go);
-//                    }
-//
-//                    else
-//                        Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
-//
-//        }
-//    }
-
-//    @Override
-//    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//            if (managerBox.isChecked() == true) {
-//                Intent go = new Intent(this, Manager.class);
-//                finish();
-//                startActivity(go);
-//            }
-//
-//            else if (userBox.isChecked() == true) {
-//                Intent go = new Intent(this, User.class);
-//                finish();
-//                startActivity(go);
-//            }
-//
-//            else
-//                Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
-//    }

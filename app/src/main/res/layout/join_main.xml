@@ -35,15 +35,21 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/etTel"
+        android:id="@+id/etId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
-        android:hint="휴대폰 번호"
+        android:hint="id"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
+
+    <Button
+        android:id="@+id/checkBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="id 중복 확인" />
 
     <EditText
         android:id="@+id/etPw"
@@ -52,18 +58,18 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
-        android:hint="비밀번호"
+        android:hint="pw"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
 
     <EditText
-        android:id="@+id/etCar"
+        android:id="@+id/etNum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
-        android:hint="차 번호"
+        android:hint="관리구역 번호"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
@@ -72,27 +78,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/userBox"
-            android:layout_width="3dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:text="@string/user" />
-
-        <CheckBox
-            android:id="@+id/managerBox"
-            android:layout_width="3dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:layout_weight="1"
-            android:text="@string/manager" />
-    </LinearLayout>
+        android:orientation="horizontal"/>
 
     <Button
-        android:id="@+id/checkBTN"
+        android:id="@+id/JoinBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
