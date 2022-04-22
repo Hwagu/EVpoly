@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -32,7 +33,7 @@ public class JoinActivity extends AppCompatActivity {
 
     DBHelper dbHelper;
     SQLiteDatabase database;
-    private Button JoinBTN, checkBTN;
+    private ImageView JoinBTN, checkBTN;
     private EditText etName, etId, etPw, etNum;
 
     private String tableName;
@@ -50,8 +51,8 @@ public class JoinActivity extends AppCompatActivity {
         dbHelper=new DBHelper(this);
         db=dbHelper.getWritableDatabase();
 
-        JoinBTN = (Button) findViewById(R.id.JoinBTN);
-        checkBTN = (Button) findViewById(R.id.checkBTN);
+        JoinBTN = (ImageView) findViewById(R.id.JoinBTN);
+        checkBTN = (ImageView) findViewById(R.id.checkBTN);
         etName = (EditText) findViewById(R.id.etName);
         etId = (EditText) findViewById(R.id.etId);
         etPw = (EditText) findViewById(R.id.etPw);
@@ -101,7 +102,6 @@ public class JoinActivity extends AppCompatActivity {
                 }
         );
 
-        JoinBTN=(Button) findViewById(R.id.JoinBTN);
         JoinBTN.setOnClickListener(
                 new Button.OnClickListener() {
                     @Override

@@ -4,88 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context="com.example.evpoly.JoinActivity">
+    android:background="@drawable/bg4"
+    >
 
-    <ImageView
-        android:id="@+id/clickBTN"
-        android:layout_width="428dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="0dp"
-        app:srcCompat="@drawable/evpoli" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="274dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="20dp"
-        app:srcCompat="@drawable/evpoly" />
-
-    <EditText
-        android:id="@+id/etName"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:ems="10"
-        android:hint="이름"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-    <EditText
-        android:id="@+id/etId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:ems="10"
-        android:hint="id"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/etNum"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="236dp"
+            android:ems="10"
+            android:hint="관리구역번호"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
 
+        <EditText
+            android:id="@+id/etId"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="ID"
+            android:inputType="textPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/etName"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <Button
-        android:id="@+id/checkBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="id 중복 확인" />
+        <EditText
+            android:id="@+id/etPw"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/etNum"
+            app:layout_constraintTop_toBottomOf="@+id/etId"
+            app:layout_constraintVertical_bias="0.411"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <EditText
-        android:id="@+id/etPw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:ems="10"
-        android:hint="pw"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/etName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="232dp"
+            android:ems="10"
+            android:hint="NAME"
+            android:inputType="textPersonName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
 
+        <ImageView
+            android:id="@+id/joinlogo"
+            android:layout_width="164dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.854"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.153"
+            app:srcCompat="@drawable/joinlogo" />
 
-    <EditText
-        android:id="@+id/etNum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:ems="10"
-        android:hint="관리구역 번호"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        <ImageView
+            android:id="@+id/JoinBTN"
+            android:layout_width="260dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etNum"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/join" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"/>
-
-    <Button
-        android:id="@+id/JoinBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/navy"
-        android:text="JOIN" />
+        <ImageView
+            android:id="@+id/checkBTN"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/etPw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/etId"
+            app:layout_constraintTop_toBottomOf="@+id/etName"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/check" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

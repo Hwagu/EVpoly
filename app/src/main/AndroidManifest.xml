@@ -16,6 +16,9 @@
         android:theme="@style/Theme.EVpoly"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Section1_view"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
