@@ -16,10 +16,10 @@
         android:theme="@style/Theme.EVpoly"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".LoginActivity"
+            android:name=".Section1_view"
             android:exported="false" />
         <activity
-            android:name=".Section1_view"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -12,6 +12,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
@@ -22,23 +24,30 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Section1_view extends AppCompatActivity {
     private static final String TAG = "Mainactivity";
+
+    DBHelper1 dbHelper;
+    SQLiteDatabase database;
+    private Car car;
+    private SQLiteDatabase db;
+
     //UI버튼
     ImageView cameraBTN;
     ImageView resetBTN;
     ImageView Car_image;
+    TextView carNUM;
     TextView carINTIME;
-    TextView carREMAIN;
+    TextView carOUTTIME;
 
     //카메라 권한 요청
     final static int TAKE_PICTURE = 1;
@@ -46,6 +55,7 @@ public class Section1_view extends AppCompatActivity {
     String mCurrentPhotoPath;
 
     String In_time; //입차시간
+    String Out_time; //출차시간
     String remain_time; //남은시간
 
     Uri photoUri;  //사진파일 주소
@@ -63,11 +73,25 @@ public class Section1_view extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.section1_view);
 
+        car=new Car();
+        dbHelper=new DBHelper1(this);
+        db=dbHelper.getWritableDatabase();
+
         cameraBTN = findViewById(R.id.cameraBTN);
         resetBTN = findViewById(R.id.resetBTN);
         Car_image = findViewById(R.id.Car_image);
+        carNUM = findViewById(R.id.carNUM);
         carINTIME = findViewById(R.id.carINTIME);
-        carREMAIN = findViewById(R.id.carREMAIN);
+        carOUTTIME = findViewById(R.id.carOUTTIME);
+
+        String sql="SELECT * FROM "+DBHelper1.USER_TABLE_NAME;
+        Cursor cursor =db.rawQuery(sql,null);
+        cursor.moveToLast();
+
+        carNUM.setText(cursor.getString(1));
+        carINTIME.setText(cursor.getString(2));
+        carOUTTIME.setText(cursor.getString(3));
+
 
         //카메라 권한 설정
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -111,8 +135,14 @@ public class Section1_view extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.resetBTN:
                         carINTIME.setText("");
-                        carREMAIN.setText("");
+                        carOUTTIME.setText("");
                         Car_image.setImageResource(R.drawable.empty);
+
+                        car.setCar_num("");
+                        car.setIn_time("");
+                        car.setLeft_time("");
+                        dbHelper.insertCar(car);
+
                         break;
 
                 }
@@ -149,6 +179,26 @@ public class Section1_view extends AppCompatActivity {
             }
             // 이미지뷰에 파일경로의 사진을 가져와 출력
             Car_image.setImageURI(photoUri);
+
+            Date date = new Date();
+            In_time = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분").format(date);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.HOUR, 1);
+            Out_time = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분").format(cal.getTime());
+            carINTIME.setText(In_time);
+            carOUTTIME.setText(Out_time);
+//            In_time = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분").format(new Date());
+//            carINTIME.setText(In_time);
+//            String conversionTime = "000010"; //00시 00분 00초 시간 설정
+
+            car.setCar_num("");
+            car.setIn_time(In_time);
+            car.setLeft_time(Out_time);
+            dbHelper.insertCar(car);
+
+//            countDown(conversionTime);
+
         }
     }
 
@@ -160,10 +210,7 @@ public class Section1_view extends AppCompatActivity {
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
         mCurrentPhotoPath = image.getAbsolutePath();
         Log.i(TAG, "path. " + mCurrentPhotoPath);
-        In_time = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분").format(new Date());
-        carINTIME.setText(In_time);
-        String conversionTime = "000010"; //00시 00분 00초 시간 설정
-        countDown(conversionTime);
+
         return image;
     }
 
@@ -231,7 +278,7 @@ public class Section1_view extends AppCompatActivity {
                     second = "0" + second;
                 }
                 remain_time=hour + ":" + min + ":" + second;
-                carREMAIN.setText(remain_time);
+                carOUTTIME.setText(remain_time);
             }
 
             // 제한시간 종료시
@@ -239,7 +286,7 @@ public class Section1_view extends AppCompatActivity {
 
                 // 변경 후
                 remain_time = "충전이 완료되었습니다.";
-                carREMAIN.setText(remain_time);
+                carOUTTIME.setText(remain_time);
                 showNoti();
                 // TODO : 타이머가 모두 종료될때 어떤 이벤트를 진행할지
 

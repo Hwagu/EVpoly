@@ -38,15 +38,15 @@
             android:id="@+id/carNUM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="372dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.583"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Car_image" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/carREMAIN"
+            android:id="@+id/carOUTTIME"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
@@ -55,13 +55,13 @@
             app:layout_constraintHorizontal_bias="0.583"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/carINTIME"
-            app:layout_constraintVertical_bias="0.225" />
+            app:layout_constraintVertical_bias="0.209" />
 
         <TextView
             android:id="@+id/carINTIME"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="39dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.631"
@@ -70,14 +70,14 @@
 
         <ImageView
             android:id="@+id/Car_image"
-            android:layout_width="338dp"
-            android:layout_height="223dp"
+            android:layout_width="324dp"
+            android:layout_height="198dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.326"
+            app:layout_constraintVertical_bias="0.332"
             app:srcCompat="@drawable/empty" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
