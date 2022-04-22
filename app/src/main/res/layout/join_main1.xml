@@ -22,19 +22,20 @@
             android:hint="관리구역번호"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/joinID"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="307dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="ID"
             android:inputType="textPersonName"
-            app:layout_constraintTop_toBottomOf="@+id/joinNAME"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/joinNAME" />
 
         <EditText
             android:id="@+id/joinPW"
@@ -45,9 +46,10 @@
             android:hint="Password"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/joinArea"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/joinID"
-            app:layout_constraintVertical_bias="0.411"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintVertical_bias="0.411" />
 
         <EditText
             android:id="@+id/joinNAME"
@@ -58,8 +60,9 @@
             android:ems="10"
             android:hint="NAME"
             android:inputType="textPersonName"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/joinlogo"
@@ -75,7 +78,7 @@
             app:srcCompat="@drawable/joinlogo" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/join"
             android:layout_width="260dp"
             android:layout_height="55dp"
             android:layout_marginTop="36dp"
@@ -86,6 +89,17 @@
             app:layout_constraintTop_toBottomOf="@+id/joinArea"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/join" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/joinPW"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toEndOf="@+id/joinID"
+            app:layout_constraintTop_toBottomOf="@+id/joinNAME"
+            app:srcCompat="@drawable/check" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
