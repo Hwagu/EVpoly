@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.example.evpoly.LoginActivity">
+    tools:context="com.example.evpoly.LoginActivity"
+    android:background="@color/bg">
 
     <ImageView
         android:id="@+id/imageView"
@@ -22,6 +23,7 @@
         app:srcCompat="@drawable/evpoly" />
 
     <EditText
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/id"
         android:layout_width="match_parent"
         android:layout_height="48dp"

@@ -29,7 +29,7 @@
             android:name="com.example.evpoly.User_view"
             android:exported="false" />
         <activity
-            android:name="com.example.evpoly.LoginActivity"
+            android:name="com.example.evpoly.test"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
