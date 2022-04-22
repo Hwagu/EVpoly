@@ -16,10 +16,10 @@
         android:theme="@style/Theme.EVpoly"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Section1_view"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Section1_view"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +38,21 @@
         <activity
             android:name=".Manager_view"
             android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.EVpoly.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
     </application>
 
+
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>
