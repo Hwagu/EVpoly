@@ -38,9 +38,6 @@
         <activity
             android:name=".Manager_view"
             android:exported="false" />
-        <activity
-            android:name=".User_view"
-            android:exported="false" />
     </application>
 
 </manifest>
