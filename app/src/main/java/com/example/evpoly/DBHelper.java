@@ -5,8 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.util.ArrayList;
+import android.util.Log;
 
 
 public class DBHelper extends SQLiteOpenHelper{
@@ -31,6 +30,13 @@ public class DBHelper extends SQLiteOpenHelper{
         db.execSQL(sql);
     }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if(newVersion >1){
+            db.execSQL("DROP TABLE IF EXISTS user");
+        }
+    }
+
     public void insertUser(User user){
 
         SQLiteDatabase db=this.getWritableDatabase();
@@ -44,35 +50,31 @@ public class DBHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public ArrayList<User> getAllUser(){
 
-        ArrayList<User> UserList= new ArrayList<User>();
-        String selectQuery="SELECT * FROM "+ USER_TABLE_NAME;
 
-        SQLiteDatabase db=this.getWritableDatabase();
-        Cursor cursor=db.rawQuery(selectQuery,null);
+    public Cursor getData(String id,String name){
 
-        if(cursor.moveToFirst()){
-            do{
-                User user=new User();
-                user.setName(cursor.getString(0));
-                user.setId(cursor.getString(1));
-                user.setPw(cursor.getString(2));
-                user.setNum(cursor.getString(3));
-                UserList.add(user);
+        Log.d(getClass().getName(),"헹퍼에서받는값"+id);
 
-            }while(cursor.moveToNext());
-        }
+        Log.d(getClass().getName(),"헹퍼에서받는값"+name);
 
-        return UserList;
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        Cursor cursor = database.rawQuery("select * from user where id='"+id+"'",null);
+
+        return cursor;
     }
 
 
+    public Cursor getlistData(String name){
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(newVersion >1){
-            db.execSQL("DROP TABLE IF EXISTS user");
-        }
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        Log.d(getClass().getName(),"헹퍼에서받는값"+name);
+
+        Cursor cursor = database.rawQuery("select * from user where name = '"+name+"'",null);
+
+        return cursor;
     }
+
 }
