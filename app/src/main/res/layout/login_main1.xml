@@ -14,45 +14,52 @@
 
         <EditText
             android:id="@+id/pressID"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="280dp"
+            android:layout_width="287dp"
+            android:layout_height="49dp"
+            android:background="@drawable/rounded_corner"
             android:ems="10"
             android:hint="휴대폰 번호"
             android:inputType="textPersonName"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <EditText
-            android:id="@+id/pressPW"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="비밀번호"
-            android:inputType="textPassword"
-            app:layout_constraintTop_toBottomOf="@+id/pressID"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <ImageView
-            android:id="@+id/signup"
-            android:layout_width="200dp"
-            android:layout_height="19dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.734"
+            app:layout_constraintVertical_bias="0.384" />
+
+        <EditText
+            android:id="@+id/pressPW"
+            android:layout_width="287dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_corner"
+            android:ems="10"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pressID"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/signup"
+            android:layout_width="260dp"
+            android:layout_height="19dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.716"
             app:srcCompat="@drawable/signup" />
 
         <ImageView
             android:id="@+id/login"
             android:layout_width="260dp"
             android:layout_height="55dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pressPW"
             app:srcCompat="@drawable/login" />
