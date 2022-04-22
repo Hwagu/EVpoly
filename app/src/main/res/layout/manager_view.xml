@@ -4,90 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="Manager_view">
+    android:background="@drawable/bg4">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="61dp"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            app:srcCompat="@drawable/small_logo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:id="@+id/imageView3"
+            android:layout_width="164dp"
+            android:layout_height="52dp"
             android:layout_weight="1"
-            android:text="주차 목록"
-            android:textAlignment="center"
-            android:textColor="#000"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.854"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.153"
+            app:srcCompat="@drawable/listlogo" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/s1BTN"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.36"
+            app:srcCompat="@drawable/area1" />
 
-        <LinearLayout
-            android:layout_width="338dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <ImageView
+            android:id="@+id/s2BTN"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.465"
+            app:srcCompat="@drawable/area2" />
 
-            <EditText
-                android:id="@+id/addName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="이름"
-                android:inputType="textPersonName"
-                android:minHeight="48dp" />
+        <ImageView
+            android:id="@+id/s3BTN"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.571"
+            app:srcCompat="@drawable/area3" />
 
-            <EditText
-                android:id="@+id/addcarNum"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="차량 번호"
-                android:inputType="textPersonName"
-                android:minHeight="48dp" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/addBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="@color/navy"
-            android:onClick="clickFunc"
-            android:text="@string/add"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="434dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-    <Button
-        android:id="@+id/alertBTN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/navy"
-        android:onClick="clickFunc"
-        android:text="@string/alert"
-        android:textAlignment="center"
-        android:textSize="24sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

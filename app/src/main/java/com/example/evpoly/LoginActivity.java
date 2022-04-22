@@ -3,117 +3,100 @@ package com.example.evpoly;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
+    DBHelper dbHelper;
+    SQLiteDatabase database;
 
     private EditText id, pw;
-    private CheckBox userBox, managerBox;
-    private Button loginBTN, joinBTN;
+    private ImageView loginBTN, joinBTN;
+    private String ID, PW;
+    private String alertNull;
 
+    private SQLiteDatabase db;
+
+    public static final String Column_id = "id";
+    public static final String Column_pw = "pw";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+
         setContentView(R.layout.login_main);
 
-        id = (EditText) findViewById(R.id.id);
-        pw = (EditText) findViewById(R.id.pw);
+        id = (EditText)findViewById(R.id.id);
+        pw = (EditText)findViewById(R.id.pw);
 
-        userBox = (CheckBox) findViewById(R.id.userBox);
-        managerBox = (CheckBox) findViewById(R.id.managerBox);
+        loginBTN = (ImageView) findViewById(R.id.loginBTN);
+        joinBTN = (ImageView) findViewById(R.id.joinBTN);
 
-        loginBTN = (Button) findViewById(R.id.loginBTN);
-        joinBTN = (Button) findViewById(R.id.joinBTN);
+        dbHelper = new DBHelper(this);
+        db=dbHelper.getReadableDatabase();
 
-        userBox.setOnCheckedChangeListener(this);
-        managerBox.setOnCheckedChangeListener(this);
 
-        loginBTN.setOnClickListener(this);
-        joinBTN.setOnClickListener(this);
-    }
+        joinBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
 
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                startActivity(intent);
+            }
+        });
 
-    }
 
-    // 주석
+        loginBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.joinBTN:
-                Intent goJoin = new Intent(this, JoinActivity.class);
-                startActivity(goJoin);
-                break;
-            case R.id.loginBTN:
-                if(managerBox.isChecked() == true && userBox.isChecked() == false){
-                    Intent goManager = new Intent(this, Manager_view.class);
-                    startActivity(goManager);
-                }
-                else if(userBox.isChecked() == true && managerBox.isChecked() == false){
-                    Intent goUser = new Intent(this, User_view.class);
-                    startActivity(goUser);
+                ID = id.getText().toString();
+                PW = pw.getText().toString();
+
+                Log.d(getClass().getName(),"온클릭해서들어가는값"+ID+","+PW);
+
+
+                if (loginidCheck(ID, PW)){
+                    Toast.makeText(getApplicationContext(),"로그인완료",Toast.LENGTH_LONG).show();
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putString("id", ID);
+                    Intent intent = new Intent(getApplicationContext(), Manager_view.class);
+                    intent.putExtras(bundle1);
+                    startActivity(intent);
                 }
                 else {
-                    Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"id 또는 pw가 틀렸습니다",Toast.LENGTH_LONG).show();
                 }
-                break;
+            }
+        });
+    }
+
+    private boolean loginidCheck(String id, String pw) {
+        if(id== null ||id.equals("")){
+            alertNull="아이디를 입력하세요";
+            return false;
         }
+        else{
+        }
+
+        String sql="SELECT name FROM "+DBHelper.USER_TABLE_NAME + " where " + Column_id
+                + "= '"+ id +"' and " + Column_pw + "= '" + pw + "'";
+
+        Cursor cursor =db.rawQuery(sql,null);
+        if(cursor.getCount()==0){
+            return false;
+        }
+
+        return  true;
     }
 }
 
-//    @Override
-//    public void onClick(View view) {
-//
-//        boolean checked = ((CheckBox) view).isChecked();
-//
-//        switch(view.getId()) {
-//            case R.id.loginBTN:
-//
-//                case R.id.managerBox:
-//                    if (managerBox.isChecked() == true) {
-//                        Intent go = new Intent(this, Manager.class);
-//                        finish();
-//                        startActivity(go);
-//                    }
-//
-//                    else if (userBox.isChecked() == true) {
-//                        Intent go = new Intent(this, User.class);
-//                        finish();
-//                        startActivity(go);
-//                    }
-//
-//                    else
-//                        Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
-//
-//        }
-//    }
-
-//    @Override
-//    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//            if (managerBox.isChecked() == true) {
-//                Intent go = new Intent(this, Manager.class);
-//                finish();
-//                startActivity(go);
-//            }
-//
-//            else if (userBox.isChecked() == true) {
-//                Intent go = new Intent(this, User.class);
-//                finish();
-//                startActivity(go);
-//            }
-//
-//            else
-//                Toast.makeText(this, "User 또는 Manager 중 하나를 선택하시오.", Toast.LENGTH_LONG).show();
-//    }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.evpoly">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -13,23 +13,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EVpoly">
-
-        <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="5s6g59jkz6" />
-
+        android:theme="@style/Theme.EVpoly"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name="com.example.evpoly.JoinActivity"
+            android:name=".Section1_view"
             android:exported="false" />
         <activity
-            android:name="com.example.evpoly.Manager_view"
-            android:exported="false" />
-        <activity
-            android:name="com.example.evpoly.User_view"
-            android:exported="false" />
-        <activity
-            android:name="com.example.evpoly.test"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +27,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="5s6g59jkz6" />
+
+        <activity
+            android:name=".JoinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Manager_view"
+            android:exported="false" />
     </application>
 
 </manifest>

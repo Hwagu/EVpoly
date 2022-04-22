@@ -7,28 +7,27 @@
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/btnenabled.xml" value="0.1" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/btntxt_enabled.xml" value="0.1" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/drawable_resize.xml" value="0.1885" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/ic_component_8.xml" value="0.1" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3185" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/mainlogo.xml" value="0.1" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/power_resize.xml" value="0.1" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/powerup_resize.xml" value="0.1885" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/radius.xml" value="0.5205" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/switch_thumb.xml" value="0.2865" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/switch_track_off.xml" value="0.516" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/switch_track_on.xml" value="0.516" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/switch_track_selector.xml" value="0.516" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/item_recyclerview.xml" value="0.28125" />
         <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/join_main.xml" value="0.18795289855072464" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/join_main1.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/list_view.xml" value="0.3613963039014374" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/login_main.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/login_main1.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/manager_area1.xml" value="0.47146739130434784" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/manager_area2.xml" value="0.401268115942029" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/manager_area3.xml" value="0.47146739130434784" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/manager_camera.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/manager_view.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/user_view.xml" value="0.21794871794871795" />
+        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/login_main.xml" value="0.136226034308779" />
+        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/manager_view.xml" value="0.18840579710144928" />
+
+        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/user_view.xml" value="0.1" />
+        <entry key="..\:/Users/HUSTAR11/AndroidStudioProjects/EVpoly/app/src/main/res/layout/activity_login.xml" value="0.2833333333333333" />
+        <entry key="..\:/Users/HUSTAR11/AndroidStudioProjects/EVpoly/app/src/main/res/layout/activity_volley.xml" value="0.5239583333333333" />
+        <entry key="..\:/Users/HUSTAR11/AndroidStudioProjects/EVpoly/app/src/main/res/layout/item_recyclerview.xml" value="0.2833333333333333" />
+        <entry key="..\:/Users/HUSTAR11/AndroidStudioProjects/EVpoly/app/src/main/res/layout/join_main.xml" value="0.2833333333333333" />
+        <entry key="..\:/Users/HUSTAR11/AndroidStudioProjects/EVpoly/app/src/main/res/layout/login_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/HUSTAR11/AndroidStudioProjects/EVpoly/app/src/main/res/layout/manager_view.xml" value="0.2875" />
+        <entry key="..\:/Users/HUSTAR11/AndroidStudioProjects/EVpoly/app/src/main/res/layout/section1_view.xml" value="0.2875" />
+        <entry key="..\:/Users/HUSTAR05/AndroidStudioProjects/EVpoly/app/src/main/res/layout/user_view.xml" value="0.3333333333333333" />
+
         <entry key="..\:/Users/hustar1234/AndroidStudioProjects/EVpoly/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.265" />
         <entry key="..\:/Users/hustar1234/AndroidStudioProjects/EVpoly/app/src/main/res/drawable/ic_launcher_background.xml" value="0.259" />
         <entry key="..\:/Users/hustar1234/AndroidStudioProjects/EVpoly/app/src/main/res/layout/activity_main.xml" value="0.22760416666666666" />
