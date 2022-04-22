@@ -16,7 +16,7 @@
 
                 android:color="@color/navy" />
 
-            <corners android:radius="4dp"/>
+            <corners android:radius="30dp"/>
 
             <solid
 
