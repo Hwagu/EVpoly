@@ -8,11 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
-public class DBHelper extends SQLiteOpenHelper{
-    public static String NAME="diary.db";
+public class DBHelper2 extends SQLiteOpenHelper{
+    public static String NAME="section2.db";
     public static int VERSION=1;
-    public static String USER_TABLE_NAME="user";
-    public DBHelper(Context context){
+    public static String USER_TABLE_NAME="car";
+    public DBHelper2(Context context){
         super(context,NAME,null,VERSION);
     }
 
@@ -21,11 +21,12 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String sql="CREATE TABLE IF NOT EXISTS user("+
-                "name TEXT PRIMARY KEY,"+
-                "id TEXT,"+
-                "pw TEXT,"+
-                "num TEXT )";
+        String sql="CREATE TABLE IF NOT EXISTS car("+
+                "car_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "car_num TEXT,"+
+                "in_time TEXT,"+
+                "left_time TEXT,"+
+                "image TEXT )";
 
         db.execSQL(sql);
     }
@@ -33,21 +34,22 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if(newVersion >1){
-            db.execSQL("DROP TABLE IF EXISTS user");
+            db.execSQL("DROP TABLE IF EXISTS car");
         }
     }
 
-    public void insertUser(User user){
+    public void insertCar(Car car){
 
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        values.put("name",user.getName());
-        values.put("id",user.getId());
-        values.put("pw",user.getPw());
-        values.put("num",user.getNum());
+        values.put("car_num",car.getCar_num());
+        values.put("in_time",car.getIn_time());
+        values.put("left_time",car.getLeft_time());
+        values.put("image", car.getImage());
 
         db.insert(USER_TABLE_NAME,null,values);
         db.close();
     }
+
 
 }

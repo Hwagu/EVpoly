@@ -53,8 +53,28 @@ public class Manager_view extends AppCompatActivity {
                 new Button.OnClickListener(){
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), Section1_view.class);
-                        startActivity(intent);
+                        Intent intent1 = new Intent(getApplicationContext(), Section1_view.class);
+                        startActivity(intent1);
+                    }
+                }
+        );
+
+        s2BTN.setOnClickListener(
+                new Button.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent2 = new Intent(getApplicationContext(), Section2_view.class);
+                        startActivity(intent2);
+                    }
+                }
+        );
+
+        s3BTN.setOnClickListener(
+                new Button.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent3 = new Intent(getApplicationContext(), Section3_view.class);
+                        startActivity(intent3);
                     }
                 }
         );
