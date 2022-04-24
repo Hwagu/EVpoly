@@ -50,31 +50,4 @@ public class DBHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-
-
-    public Cursor getData(String id,String name){
-
-        Log.d(getClass().getName(),"헹퍼에서받는값"+id);
-
-        Log.d(getClass().getName(),"헹퍼에서받는값"+name);
-
-        SQLiteDatabase database = this.getWritableDatabase();
-
-        Cursor cursor = database.rawQuery("select * from user where id='"+id+"'",null);
-
-        return cursor;
-    }
-
-
-    public Cursor getlistData(String name){
-
-        SQLiteDatabase database = this.getReadableDatabase();
-
-        Log.d(getClass().getName(),"헹퍼에서받는값"+name);
-
-        Cursor cursor = database.rawQuery("select * from user where name = '"+name+"'",null);
-
-        return cursor;
-    }
-
 }

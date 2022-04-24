@@ -1,11 +1,5 @@
 package com.example.evpoly;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -30,6 +24,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.FileProvider;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,10 +37,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Section1_view extends AppCompatActivity {
+public class Section3_view extends AppCompatActivity {
     private static final String TAG = "Mainactivity";
 
-    DBHelper1 dbHelper;
+    DBHelper3 dbHelper;
     SQLiteDatabase database;
     private Car car;
     private SQLiteDatabase db;
@@ -62,6 +62,7 @@ public class Section1_view extends AppCompatActivity {
     String In_time; //입차시간
     String Out_time; //출차시간
 
+
     Uri photoUri;  //사진파일 주소
 
     //알림창
@@ -76,10 +77,10 @@ public class Section1_view extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.section1_view);
+        setContentView(R.layout.section3_view);
 
         car=new Car();
-        dbHelper=new DBHelper1(this);
+        dbHelper=new DBHelper3(this);
         db=dbHelper.getWritableDatabase();
 
         cameraBTN = findViewById(R.id.cameraBTN);
@@ -89,7 +90,7 @@ public class Section1_view extends AppCompatActivity {
         carINTIME = findViewById(R.id.carINTIME);
         carOUTTIME = findViewById(R.id.carOUTTIME);
 
-        String sql="SELECT * FROM "+DBHelper1.USER_TABLE_NAME;
+        String sql="SELECT * FROM "+DBHelper3.USER_TABLE_NAME;
         Cursor cursor =db.rawQuery(sql,null);
         cursor.moveToLast();
 
@@ -104,10 +105,7 @@ public class Section1_view extends AppCompatActivity {
             Car_image.setImageURI(myUri);
         }
 
-        //알림창 설정
-        notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        mCalender = new GregorianCalendar();
+
 
         //카메라 권한 설정
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -115,10 +113,14 @@ public class Section1_view extends AppCompatActivity {
                 Log.d(TAG, "권한 설정 완료");
             } else {
                 Log.d(TAG, "권한 설정 요청");
-                ActivityCompat.requestPermissions(Section1_view.this, new String[]{
+                ActivityCompat.requestPermissions(Section3_view.this, new String[]{
                         Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
+        //알림창 설정
+        notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        mCalender = new GregorianCalendar();
 
         //onClickLister 설정
         cameraBTN.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +136,7 @@ public class Section1_view extends AppCompatActivity {
                         }
 
                         if (photoFile != null) {
-                            photoUri = FileProvider.getUriForFile(Section1_view.this, "com.example.EVpoly.fileprovider", photoFile);
+                            photoUri = FileProvider.getUriForFile(Section3_view.this, "com.example.EVpoly.fileprovider", photoFile);
                             i.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                             startActivityForResult(i, 0);
                         }
@@ -219,7 +221,7 @@ public class Section1_view extends AppCompatActivity {
         }
     }
 
-    // 사진 저장 , 저장되면서 시간 체크
+    // 사진 저장 , 저장되면서 시간 체크, 타이머 동작
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
@@ -230,20 +232,18 @@ public class Section1_view extends AppCompatActivity {
 
         return image;
     }
+
     //시간 되면 푸시 알림
     private void setAlarm() {
         //AlarmReceiver에 값 전달
-        Intent receiverIntent = new Intent(Section1_view.this, AlarmRecevier.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(Section1_view.this, 0, receiverIntent, 0);
+        Intent receiverIntent = new Intent(Section3_view.this, AlarmRecevier.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(Section3_view.this, 0, receiverIntent, 0);
 
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.SECOND, 10);
-
         alarmManager.set(AlarmManager.RTC, cal.getTimeInMillis(),pendingIntent);
     }
-
-
 
 }

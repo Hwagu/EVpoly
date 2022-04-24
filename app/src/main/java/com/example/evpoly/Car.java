@@ -1,20 +1,18 @@
 package com.example.evpoly;
 
-import android.media.Image;
-
 public class Car {
     private Integer car_id;
     private String car_num;
     private String in_time;
-    private String left_time;
-    private Image car_image;
+    private String out_time;
+    private String image;
 
-    public Car(){}
 
-    public Car(String car_num, String in_time,String out_time){
+    public Car(){
         this.car_num=car_num;
         this.in_time=in_time;
-        this.left_time=out_time;
+        this.out_time=out_time;
+        this.image=image;
     }
 
 
@@ -22,7 +20,7 @@ public class Car {
         return car_num;
     }
 
-    public void setCar_num(String name) {
+    public void setCar_num(String car_num) {
         this.car_num = car_num;
     }
 
@@ -35,11 +33,19 @@ public class Car {
     }
 
     public String getLeft_time() {
-        return left_time;
+        return out_time;
     }
 
-    public void setLeft_time(String left_time) {
-        this.left_time = left_time;
+    public void setLeft_time(String out_time) {
+        this.out_time = out_time;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

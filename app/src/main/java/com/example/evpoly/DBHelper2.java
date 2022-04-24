@@ -8,11 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
-public class DBHelper1 extends SQLiteOpenHelper{
-    public static String NAME="section1.db";
+public class DBHelper2 extends SQLiteOpenHelper{
+    public static String NAME="section2.db";
     public static int VERSION=1;
     public static String USER_TABLE_NAME="car";
-    public DBHelper1(Context context){
+    public DBHelper2(Context context){
         super(context,NAME,null,VERSION);
     }
 
@@ -50,5 +50,6 @@ public class DBHelper1 extends SQLiteOpenHelper{
         db.insert(USER_TABLE_NAME,null,values);
         db.close();
     }
+
 
 }
