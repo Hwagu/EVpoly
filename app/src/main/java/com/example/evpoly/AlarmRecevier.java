@@ -40,8 +40,8 @@ public class AlarmRecevier extends BroadcastReceiver {
         }
 
         //알림창 클릭 시 activity 화면 부름
-        Intent intent2 = new Intent(context, Manager_view.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,101,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent2 = new Intent(context, Section1_view.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,101,intent2, PendingIntent.FLAG_IMMUTABLE);
 
         //알림창 제목
         builder.setContentTitle("EVploy");
