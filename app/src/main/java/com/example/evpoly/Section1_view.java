@@ -234,7 +234,7 @@ public class Section1_view extends AppCompatActivity {
     private void setAlarm() {
         //AlarmReceiver에 값 전달
         Intent receiverIntent = new Intent(Section1_view.this, AlarmRecevier.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(Section1_view.this, 0, receiverIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(Section1_view.this, 0, receiverIntent, PendingIntent.FLAG_IMMUTABLE);
 
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
