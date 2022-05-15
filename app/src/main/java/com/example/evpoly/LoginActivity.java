@@ -3,6 +3,7 @@ package com.example.evpoly;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText id, pw;
     private ImageView loginBTN, joinBTN;
+    private CheckBox checkBox;
     private String ID, PW;
     private String alertNull;
 
@@ -40,10 +43,10 @@ public class LoginActivity extends AppCompatActivity {
 
         loginBTN = (ImageView) findViewById(R.id.loginBTN);
         joinBTN = (ImageView) findViewById(R.id.joinBTN);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
 
         dbHelper = new DBHelper(this);
         db=dbHelper.getReadableDatabase();
-
 
         joinBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,9 +71,16 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"로그인완료",Toast.LENGTH_LONG).show();
                     Bundle bundle1 = new Bundle();
                     bundle1.putString("id", ID);
+
+                    if(checkBox.isChecked() == true){
+                        SaveSharedPreference.setUserId(LoginActivity.this, ID);
+                    }
+
                     Intent intent = new Intent(getApplicationContext(), Manager_view.class);
                     intent.putExtras(bundle1);
                     startActivity(intent);
+
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"id 또는 pw가 틀렸습니다",Toast.LENGTH_LONG).show();
