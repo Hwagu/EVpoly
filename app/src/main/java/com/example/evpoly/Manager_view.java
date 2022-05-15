@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 public class Manager_view extends AppCompatActivity {
 
     private ImageView s1BTN, s2BTN, s3BTN;
+    private Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class Manager_view extends AppCompatActivity {
         s1BTN = (ImageView) findViewById(R.id.s1BTN);
         s2BTN = (ImageView) findViewById(R.id.s2BTN);
         s3BTN = (ImageView) findViewById(R.id.s3BTN);
+        logout = (Button) findViewById(R.id.logout);
 
         s1BTN.setOnClickListener(
                 new Button.OnClickListener(){
@@ -75,6 +77,18 @@ public class Manager_view extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent3 = new Intent(getApplicationContext(), Section3_view.class);
                         startActivity(intent3);
+                    }
+                }
+        );
+
+        logout.setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        SaveSharedPreference.clearUserId(Manager_view.this);
+                        Intent intent4 = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent4);
+                        finish();
                     }
                 }
         );
