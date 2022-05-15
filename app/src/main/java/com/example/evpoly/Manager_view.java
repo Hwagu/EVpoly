@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
 
 public class Manager_view extends AppCompatActivity {
 
-    private ImageView s1BTN, s2BTN, s3BTN;
+
     private Button logout;
 
     @Override
@@ -46,48 +46,18 @@ public class Manager_view extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager_view);
 
-        s1BTN = (ImageView) findViewById(R.id.s1BTN);
-        s2BTN = (ImageView) findViewById(R.id.s2BTN);
-        s3BTN = (ImageView) findViewById(R.id.s3BTN);
+
         logout = (Button) findViewById(R.id.logout);
 
-        s1BTN.setOnClickListener(
-                new Button.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent1 = new Intent(getApplicationContext(), Section1_view.class);
-                        startActivity(intent1);
-                    }
-                }
-        );
 
-        s2BTN.setOnClickListener(
-                new Button.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent2 = new Intent(getApplicationContext(), Section2_view.class);
-                        startActivity(intent2);
-                    }
-                }
-        );
-
-        s3BTN.setOnClickListener(
-                new Button.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent3 = new Intent(getApplicationContext(), Section3_view.class);
-                        startActivity(intent3);
-                    }
-                }
-        );
 
         logout.setOnClickListener(
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
                         SaveSharedPreference.clearUserId(Manager_view.this);
-                        Intent intent4 = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(intent4);
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
                         finish();
                     }
                 }

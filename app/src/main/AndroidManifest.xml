@@ -41,8 +41,8 @@
         </activity>
 
         <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="5s6g59jkz6" />
+            android:name="com.kakao.sdk.AppKey"
+            android:value="596b35ef9dc6752cccbc1ad19012599d" />
 
         <activity
             android:name=".LoginActivity"
